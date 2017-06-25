@@ -1,0 +1,211 @@
+﻿Version=5.51
+AppType=JavaFX
+NumberOfModules=3
+Module1=TextFlow
+Module2=UndoManager
+Module3=CSSUtils
+Build1=Default,b4j.example
+NumberOfFiles=1
+File1=1.bjl
+NumberOfLibraries=12
+Library1=jcore
+Library2=jfx
+Library3=oslibrary
+Library4=jdiskspace
+Library5=jsystemtray
+Library6=jstringutils
+Library7=jrandomaccessfile
+Library8=jcustomwindow
+Library9=jmsgboxes
+Library10=javaobject
+Library11=jcontrolsfx
+Library12=jmqtt
+@EndOfDesignText@
+#Region Project Attributes 
+	#MainFormWidth: 600
+	#MainFormHeight: 600 
+#End Region
+
+Sub Process_Globals
+	Private fx As JFX
+	Private MainForm As Form
+	Private ChoiceBox1 As ChoiceBox
+	Private ColorPicker1 As ColorPicker
+	Private ComboBox1 As ComboBox
+	Private Label1 As Label
+	Private Label2 As Label
+	Private Label3 As Label
+	Private MenuBar1 As MenuBar
+	Private Pane1 As Pane
+	Private TextArea1 As TextArea
+	Dim dir As String="C:\SmartOffice"
+	Dim colorlist,fontlist,sizelist,editor,menulist As List 
+	Dim ts As TextFlow
+	Dim bbar As BreadCrumbBar
+	Dim control As JFX
+	Dim jo As JavaObject
+	Private TextField1 As TextField
+	Private Label1 As Label
+	Dim prop As PropertySheet
+	Type Record(Text As String, Number As Double, _
+     Color As Paint, Fnt As Font, Choices As String, YesNo As Boolean)
+	Private rechtangleMain As Node
+	Type UndoData (Text As String, clr As Int)
+	Private timer1 As Timer
+	Private manager As UndoManager
+	Private btnundo As Button
+	Private btnredo As Button
+	Private cho As DirectoryChooser
+	Dim save As FileChooser
+	Private Button1 As Button
+	Private Button2 As Button
+	Dim mi As MenuItem
+	Private ComboBox2 As ComboBox
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	MainForm = Form1
+	MainForm.RootPane.LoadLayout("1") 'Load the layout file.
+	MainForm.Resizable=False
+	MainForm.Show
+	prop.Initialize("prop")
+	If File.Exists("C:\SmartOffice\Files","log.txt") Then 
+		
+		Else
+			File.MakeDir("C:\","SmartOffice")
+			File.WriteString(dir,"log.txt","Willkommen")
+	End If
+	colorlist.Initialize
+	menulist.Initialize
+	menulist.AddAll(MenuBar1.Menus)
+	
+	sizelist.Initialize
+	editor.Initialize
+	editor.AddAll(TextArea1.StyleClasses)
+	Label1.Initialize("label1")
+	Label1.Enabled=True 
+	TextArea1.Text=Label1.Text
+	For s = 0 To editor.Size-1
+		Log(editor.Get(s))
+	Next
+	fontlist.Initialize
+	fontlist.Clear
+	fontlist.AddAll(control.GetAllFontFamilies)
+	ComboBox2.Items.AddAll(fontlist)
+	sizelist.Clear
+	For d = 4 To 55
+		sizelist.Add(d)
+	Next
+	ComboBox1.Items.AddAll(sizelist)
+	timer1.Initialize("timer1", 1000)
+	timer1.Enabled = True
+	manager.Initialize(GetState)
+	cho.Initialize
+	save.Initialize
+	cho.InitialDirectory=dir
+	save.InitialDirectory=cho.InitialDirectory
+End Sub
+
+'Return true to allow the default exceptions handler to handle the uncaught exception.
+Sub Application_Error (Error As Exception, StackTrace As String) As Boolean
+	Return True
+End Sub
+
+Sub GetState As UndoData
+	Dim ud As UndoData
+	ud.Initialize
+	ud.Text = TextArea1.Text
+	ud.clr = fx.Colors.To32Bit(ColorPicker1.SelectedColor)
+	Return ud
+End Sub
+
+Sub SetState (ud As UndoData)
+	TextArea1.text = ud.Text
+	ColorPicker1.SelectedColor = fx.Colors.From32Bit(ud.clr)
+End Sub
+
+Sub MenuBar1_Action
+	mi = Sender
+	If mi.Text="_Close" Then
+		MainForm.Close
+		Log("close..")
+	End If
+End Sub
+
+Sub ComboBox1_ValueChanged (Value As Object)
+	CSSUtils.SetStyleProperty(TextArea1, "-fx-font-size",ComboBox1.Items.Get(Value))
+		Log(Value)
+End Sub
+
+Sub ComboBox1_SelectedIndexChanged(Index As Int, Value As Object)
+	ComboBox1.SelectedIndex=Index
+	Log(Index)
+End Sub
+Sub ComboBox2_ValueChanged (Value As Object)
+	Try
+CSSUtils.SetStyleProperty(TextArea1, "-fx-font-family",Value)
+Catch
+Log(LastException)
+End Try
+End Sub
+
+Sub ComboBox2_SelectedIndexChanged(Index As Int, Value As Object)
+	ComboBox2.SelectedIndex=Index
+End Sub
+Sub ColorPicker1_ValueChanged (Value As Paint)
+	CSSUtils.SetStyleProperty(TextArea1, "-fx-text-fill", CSSUtils.ColorToHex(Value))
+	TextArea1.SelectAll
+End Sub 
+
+Sub TextArea1_MouseClicked (EventData As MouseEvent)
+	If EventData.PrimaryButtonPressed Then
+		
+			
+'			TextArea1.Text=control.Clipboard.GetString		
+End If
+
+End Sub
+
+Sub TextArea1_TextChanged (Old As String, New As String)
+	File.WriteString(dir,"new.txt",New)
+	File.WriteString(dir,"old.txt",Old)
+End Sub
+
+Sub Timer1_Tick
+	manager.AddState(GetState) 'nothing will happen if the state is the same as the previous one
+End Sub
+
+Sub btnundo_Action
+	Dim ud As UndoData = manager.Undo
+	SetState(ud)
+End Sub
+
+Sub btnredo_Action
+	Dim ud As UndoData = manager.Redo
+	If ud <> Null Then
+		SetState(ud)
+	End If
+End Sub
+
+Sub Button2_Action
+	
+End Sub
+
+Sub Button1_Action
+	save.setExtensionFilter("TextFile", Array As String("*.txt", "*.doc","*.html"))
+	save.Title="Speichern"
+	save.ShowSave(MainForm) 
+End Sub
+
+Sub MenuBar1_SelectedChange (Selected As Boolean)
+	
+End Sub
+
+Sub mi_Action
+	mi = Sender
+	If mi.Text="_Kopieren" Then
+		
+		Log("close..")
+	End If
+End Sub
+
