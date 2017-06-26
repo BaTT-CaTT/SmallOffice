@@ -7,7 +7,7 @@ Module3=CSSUtils
 Build1=Default,b4j.example
 NumberOfFiles=1
 File1=1.bjl
-NumberOfLibraries=12
+NumberOfLibraries=14
 Library1=jcore
 Library2=jfx
 Library3=oslibrary
@@ -20,47 +20,33 @@ Library9=jmsgboxes
 Library10=javaobject
 Library11=jcontrolsfx
 Library12=jmqtt
+Library13=jxmlsax
+Library14=json
 @EndOfDesignText@
 #Region Project Attributes 
 	#MainFormWidth: 600
-	#MainFormHeight: 600 
+	#MainFormHeight: 800 
 #End Region
 
 Sub Process_Globals
 	Private fx As JFX
 	Private MainForm As Form
-	Private ChoiceBox1 As ChoiceBox
-	Private ColorPicker1 As ColorPicker
-	Private ComboBox1 As ComboBox
-	Private Label1 As Label
-	Private Label2 As Label
-	Private Label3 As Label
 	Private MenuBar1 As MenuBar
-	Private Pane1 As Pane
-	Private TextArea1 As TextArea
-	Dim dir As String="C:\SmartOffice"
-	Dim colorlist,fontlist,sizelist,editor,menulist As List 
-	Dim ts As TextFlow
-	Dim bbar As BreadCrumbBar
-	Dim control As JFX
-	Dim jo As JavaObject
-	Private TextField1 As TextField
-	Private Label1 As Label
+	Dim dir As String="C:\SmartOffice\core\data"
+	Dim dir1 As String="C:\Users\Public\Documents\SmartOffice"
+	Dim menulist As List 
 	Dim prop As PropertySheet
 	Type Record(Text As String, Number As Double, _
      Color As Paint, Fnt As Font, Choices As String, YesNo As Boolean)
-	Private rechtangleMain As Node
 	Type UndoData (Text As String, clr As Int)
 	Private timer1 As Timer
 	Private manager As UndoManager
-	Private btnundo As Button
-	Private btnredo As Button
 	Private cho As DirectoryChooser
 	Dim save As FileChooser
-	Private Button1 As Button
-	Private Button2 As Button
+	Dim time, date As String 
 	Dim mi As MenuItem
-	Private ComboBox2 As ComboBox
+	Private edit As HTMLEditor
+	Private StatusBar1 As StatusBar
 End Sub
 
 Sub AppStart (Form1 As Form, Args() As String)
@@ -72,38 +58,24 @@ Sub AppStart (Form1 As Form, Args() As String)
 	If File.Exists("C:\SmartOffice\Files","log.txt") Then 
 		
 		Else
-			File.MakeDir("C:\","SmartOffice")
-			File.WriteString(dir,"log.txt","Willkommen")
+			File.MakeDir("C:\","SmartOffice\core\data")
+			File.MakeDir("C:\","SmartOffice\Projects")
+		File.MakeDir("C:\Users\Public\Documents","SmartOffice\Projects")
+			File.WriteString(dir1,"log.txt","Willkommen")
 	End If
-	colorlist.Initialize
 	menulist.Initialize
 	menulist.AddAll(MenuBar1.Menus)
-	
-	sizelist.Initialize
-	editor.Initialize
-	editor.AddAll(TextArea1.StyleClasses)
-	Label1.Initialize("label1")
-	Label1.Enabled=True 
-	TextArea1.Text=Label1.Text
-	For s = 0 To editor.Size-1
-		Log(editor.Get(s))
-	Next
-	fontlist.Initialize
-	fontlist.Clear
-	fontlist.AddAll(control.GetAllFontFamilies)
-	ComboBox2.Items.AddAll(fontlist)
-	sizelist.Clear
-	For d = 4 To 55
-		sizelist.Add(d)
-	Next
-	ComboBox1.Items.AddAll(sizelist)
+	DateTime.DateFormat="yyyy-MM-dd"
+	time=DateTime.Time(DateTime.Now)
+	date=DateTime.Date(DateTime.Now)
 	timer1.Initialize("timer1", 1000)
 	timer1.Enabled = True
 	manager.Initialize(GetState)
 	cho.Initialize
 	save.Initialize
-	cho.InitialDirectory=dir
+	cho.InitialDirectory=dir1&"\Projects"
 	save.InitialDirectory=cho.InitialDirectory
+	
 End Sub
 
 'Return true to allow the default exceptions handler to handle the uncaught exception.
@@ -114,63 +86,34 @@ End Sub
 Sub GetState As UndoData
 	Dim ud As UndoData
 	ud.Initialize
-	ud.Text = TextArea1.Text
-	ud.clr = fx.Colors.To32Bit(ColorPicker1.SelectedColor)
+	ud.Text = edit.HtmlText
+	'ud.clr = fx.Colors.To32Bit(edit.SelectedColor)
 	Return ud
 End Sub
 
 Sub SetState (ud As UndoData)
-	TextArea1.text = ud.Text
-	ColorPicker1.SelectedColor = fx.Colors.From32Bit(ud.clr)
+	edit.HtmlText = ud.Text
+	'edit.SelectedColor = fx.Colors.From32Bit(ud.clr)
 End Sub
 
 Sub MenuBar1_Action
 	mi = Sender
 	If mi.Text="_Close" Then
 		MainForm.Close
-		Log("close..")
+		Log("close..") 
 	End If
+	If mi.Text="_Undo" Then
+	btnundo_Action
+	End If 
+	If mi.Text="_Redo" Then 
+		btnredo_Action
+	End If
+	If mi.Text="_Save" Then 
+		Button1_Action
+	End If 
 End Sub
 
-Sub ComboBox1_ValueChanged (Value As Object)
-	CSSUtils.SetStyleProperty(TextArea1, "-fx-font-size",ComboBox1.Items.Get(Value))
-		Log(Value)
-End Sub
-
-Sub ComboBox1_SelectedIndexChanged(Index As Int, Value As Object)
-	ComboBox1.SelectedIndex=Index
-	Log(Index)
-End Sub
-Sub ComboBox2_ValueChanged (Value As Object)
-	Try
-CSSUtils.SetStyleProperty(TextArea1, "-fx-font-family",Value)
-Catch
-Log(LastException)
-End Try
-End Sub
-
-Sub ComboBox2_SelectedIndexChanged(Index As Int, Value As Object)
-	ComboBox2.SelectedIndex=Index
-End Sub
-Sub ColorPicker1_ValueChanged (Value As Paint)
-	CSSUtils.SetStyleProperty(TextArea1, "-fx-text-fill", CSSUtils.ColorToHex(Value))
-	TextArea1.SelectAll
-End Sub 
-
-Sub TextArea1_MouseClicked (EventData As MouseEvent)
-	If EventData.PrimaryButtonPressed Then
-		
-			
-'			TextArea1.Text=control.Clipboard.GetString		
-End If
-
-End Sub
-
-Sub TextArea1_TextChanged (Old As String, New As String)
-	File.WriteString(dir,"new.txt",New)
-	File.WriteString(dir,"old.txt",Old)
-End Sub
-
+               
 Sub Timer1_Tick
 	manager.AddState(GetState) 'nothing will happen if the state is the same as the previous one
 End Sub
@@ -178,12 +121,16 @@ End Sub
 Sub btnundo_Action
 	Dim ud As UndoData = manager.Undo
 	SetState(ud)
+	StatusBar1.Progress=100
+	StatusBar1.Text="UnDone @"&time
 End Sub
 
 Sub btnredo_Action
 	Dim ud As UndoData = manager.Redo
 	If ud <> Null Then
 		SetState(ud)
+		StatusBar1.Progress=100
+		StatusBar1.Text="ReDone @"&time
 	End If
 End Sub
 
@@ -192,9 +139,18 @@ Sub Button2_Action
 End Sub
 
 Sub Button1_Action
-	save.setExtensionFilter("TextFile", Array As String("*.txt", "*.doc","*.html"))
-	save.Title="Speichern"
-	save.ShowSave(MainForm) 
+	Dim filename As String = save.ShowSave(MainForm)
+	save.setExtensionFilter("TextFile", Array As String("*.txt"))
+	save.InitialFileName="default.txt"
+	save.Title="Save File"
+	If filename <> "" Then
+	If filename.ToLowerCase.EndsWith(".txt") = False Then filename = filename & ".txt"
+	Dim out As OutputStream = File.OpenOutput("", filename, False)
+		File.Delete(dir,"nosave.txt")
+	out.Close
+	Log("File saved: " & filename)
+	
+	End If 
 End Sub
 
 Sub MenuBar1_SelectedChange (Selected As Boolean)
@@ -209,3 +165,16 @@ Sub mi_Action
 	End If
 End Sub
 
+Sub Mainform_CloseRequest (EventData As Event)
+	If File.Exists(dir,"nosave.txt") Then 
+		
+		If fx.Msgbox2(MainForm,"You apear to close without Saving the File! would you like to Save the current document?","Save?!","Yes","","No",fx.MSGBOX_WARNING)=fx.DialogResponse.POSITIVE Then
+			Button1_Action
+		Else
+			File.WriteString(dir,"nosave.txt","true")
+		End If
+		Else 
+		EventData.Consume
+		MainForm.Close
+	End If
+End Sub
