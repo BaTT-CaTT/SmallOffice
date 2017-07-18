@@ -1,13 +1,27 @@
 ﻿Version=5.51
 AppType=JavaFX
-NumberOfModules=3
+NumberOfModules=4
 Module1=TextFlow
 Module2=UndoManager
 Module3=CSSUtils
+Module4=ModalForm
 Build1=Default,b4j.example
-NumberOfFiles=1
+NumberOfFiles=14
 File1=1.bjl
-NumberOfLibraries=14
+File2=2.bjl
+File3=ic_attachment_black_48dp.png
+File4=ic_format_align_center_black_18dp.png
+File5=ic_format_align_justify_black_18dp.png
+File6=ic_format_align_left_black_18dp.png
+File7=ic_format_align_right_black_18dp.png
+File8=ic_format_indent_increase_black_48dp.png
+File9=ic_insert_drive_file_black_48dp.png
+File10=Icon.png
+File11=new.png
+File12=open.png
+File13=save.png
+File14=style1.css
+NumberOfLibraries=13
 Library1=jcore
 Library2=jfx
 Library3=oslibrary
@@ -15,17 +29,16 @@ Library4=jdiskspace
 Library5=jsystemtray
 Library6=jstringutils
 Library7=jrandomaccessfile
-Library8=jcustomwindow
-Library9=jmsgboxes
-Library10=javaobject
-Library11=jcontrolsfx
-Library12=jmqtt
-Library13=jxmlsax
-Library14=json
+Library8=jmsgboxes
+Library9=javaobject
+Library10=jcontrolsfx
+Library11=jmqtt
+Library12=jxmlsax
+Library13=json
 @EndOfDesignText@
 #Region Project Attributes 
-	#MainFormWidth: 600
-	#MainFormHeight: 800 
+	#MainFormWidth:600
+	#MainFormHeight:800 
 #End Region
 
 Sub Process_Globals
@@ -42,29 +55,46 @@ Sub Process_Globals
 	Private timer1 As Timer
 	Private manager As UndoManager
 	Private cho As DirectoryChooser
-	Dim save As FileChooser
+	Dim save1 As FileChooser
 	Dim time, date As String 
 	Dim mi As MenuItem
 	Private edit As HTMLEditor
 	Private StatusBar1 As StatusBar
+Dim tr As TextReader
+	Private Pane1 As Pane
+	Private TextArea1 As TextArea
+	Private CMenu As ContextMenu
 End Sub
 
 Sub AppStart (Form1 As Form, Args() As String)
 	MainForm = Form1
+	MainForm.SetFormStyle("DECORATED")
+	'MainForm.SetWindowSizeLimits(600,800,1000,1000)
+	MainForm.title="SmallNode"
+	MainForm.WindowWidth = fx.PrimaryScreen.MaxX - fx.PrimaryScreen.MinX
+	MainForm.WindowLeft = fx.PrimaryScreen.MinX
+	MainForm.WindowHeight = fx.PrimaryScreen.MaxY - fx.PrimaryScreen.MinY
+	MainForm.WindowTop = fx.PrimaryScreen.MinY
 	MainForm.RootPane.LoadLayout("1") 'Load the layout file.
-	MainForm.Resizable=False
-	MainForm.Show
+	MainForm.Resizable=True
+	menulist.Initialize
+	CMenu.Initialize("CM")
 	prop.Initialize("prop")
-	If File.Exists("C:\SmartOffice\Files","log.txt") Then 
+	If File.Exists(dir,"logs.txt") Then 
 		
 		Else
+		File.MakeDir("C:\Users\Public\Documents","SmartOffice\Projects\Web")
 			File.MakeDir("C:\","SmartOffice\core\data")
 			File.MakeDir("C:\","SmartOffice\Projects")
-		File.MakeDir("C:\Users\Public\Documents","SmartOffice\Projects")
-			File.WriteString(dir1,"log.txt","Willkommen")
+		File.WriteList(dir,"setlist.txt",menulist)
+		
+			File.WriteString(dir,"log.txt","Willkommen")
+		File.WriteString(dir,"new.txt","Welcome this is a New Texted file.")
 	End If
-	menulist.Initialize
-	menulist.AddAll(MenuBar1.Menus)
+	menulist.Clear
+	
+	mi.Initialize("Html Code","mi")
+	CMenu.MenuItems.Add(mi)
 	DateTime.DateFormat="yyyy-MM-dd"
 	time=DateTime.Time(DateTime.Now)
 	date=DateTime.Date(DateTime.Now)
@@ -72,15 +102,36 @@ Sub AppStart (Form1 As Form, Args() As String)
 	timer1.Enabled = True
 	manager.Initialize(GetState)
 	cho.Initialize
-	save.Initialize
+	save1.Initialize
 	cho.InitialDirectory=dir1&"\Projects"
-	save.InitialDirectory=cho.InitialDirectory
+	save1.InitialDirectory=dir1&"\Projects"
+	RedirectOutput(dir, "logs.txt")
 	
+	
+	MainForm.Show
 End Sub
 
 'Return true to allow the default exceptions handler to handle the uncaught exception.
 Sub Application_Error (Error As Exception, StackTrace As String) As Boolean
 	Return True
+End Sub
+
+Sub show_su
+	Dim mf As ModalForm
+	mf.Initialize(MainForm)
+	 mf.read_file
+End Sub
+
+Sub RedirectOutput (dir2 As String, FileName As String)
+   #if RELEASE
+	Dim out As OutputStream = File.OpenOutput(dir2, FileName, False) 'Set to True to append the logs
+	Dim ps As JavaObject
+	ps.InitializeNewInstance("java.io.PrintStream", Array(out, True, "utf8"))
+	Dim jo As JavaObject
+	jo.InitializeStatic("java.lang.System")
+	jo.RunMethod("setOut", Array(ps))
+	jo.RunMethod("setErr", Array(ps))
+   #end if
 End Sub
 
 Sub GetState As UndoData
@@ -102,18 +153,26 @@ Sub MenuBar1_Action
 		MainForm.Close
 		Log("close..") 
 	End If
-	If mi.Text="_Undo" Then
-	btnundo_Action
+	If mi.Text="_New" Then 
+		new_file("New Text")
+	End If
+	If mi.Text="_Show Code" Then 
+		show_su
 	End If 
-	If mi.Text="_Redo" Then 
+	If mi.Text="_Open" Then
+		open_new
+	End If
+	If mi.Text="_Undo" Then
+		btnundo_Action
+	End If
+	If mi.Text="_Redo" Then
 		btnredo_Action
 	End If
-	If mi.Text="_Save" Then 
+	If mi.Text="_Save" Then
 		Button1_Action
-	End If 
+	End If
 End Sub
-
-               
+     
 Sub Timer1_Tick
 	manager.AddState(GetState) 'nothing will happen if the state is the same as the previous one
 End Sub
@@ -134,19 +193,43 @@ Sub btnredo_Action
 	End If
 End Sub
 
-Sub Button2_Action
-	
+Sub open_new
+	Dim filen As String = save1.ShowOpen(MainForm)
+'	Dim fna As String=save1.InitialFileName
+'	fna=filen
+	save1.Title="Open File"
+	If filen <> "" Then
+		menulist.Clear
+		menulist.Add(filen)
+		edit.HtmlText=File.ReadString(filen,"")
+		File.WriteString(dir,"new.txt",filen)
+	End If
+End Sub
+
+Sub new_file(text As String)
+	File.WriteString(dir,"new.txt",text)
+	read_file
+End Sub
+
+Sub read_file
+	Dim text As String=File.ReadString(dir,"new.txt")
+	edit.HtmlText=text
+	TextArea1.Text=text
 End Sub
 
 Sub Button1_Action
-	Dim filename As String = save.ShowSave(MainForm)
-	save.setExtensionFilter("TextFile", Array As String("*.txt"))
-	save.InitialFileName="default.txt"
-	save.Title="Save File"
+	save1.setExtensionFilter("TextFile", Array As String("*.txt"))
+	save1.InitialFileName="default.txt"
+	save1.Title="Save File"
+	Dim filename As String = save1.ShowSave(MainForm)
 	If filename <> "" Then
 	If filename.ToLowerCase.EndsWith(".txt") = False Then filename = filename & ".txt"
 	Dim out As OutputStream = File.OpenOutput("", filename, False)
 		File.Delete(dir,"nosave.txt")
+		File.WriteString("",filename,edit.HtmlText)
+		MainForm.Title=filename
+		menulist.Add(filename) 
+		new_file(filename)
 	out.Close
 	Log("File saved: " & filename)
 	
@@ -157,14 +240,6 @@ Sub MenuBar1_SelectedChange (Selected As Boolean)
 	
 End Sub
 
-Sub mi_Action
-	mi = Sender
-	If mi.Text="_Kopieren" Then
-		
-		Log("close..")
-	End If
-End Sub
-
 Sub Mainform_CloseRequest (EventData As Event)
 	If File.Exists(dir,"nosave.txt") Then 
 		
@@ -173,8 +248,12 @@ Sub Mainform_CloseRequest (EventData As Event)
 		Else
 			File.WriteString(dir,"nosave.txt","true")
 		End If
-		Else 
+	Else
 		EventData.Consume
 		MainForm.Close
 	End If
+End Sub
+
+Sub TextArea1_TextChanged (Old As String, New As String)
+	
 End Sub

@@ -1,0 +1,25 @@
+﻿[
+	{Text: "_File", Children: 
+		[
+			"_New",
+			"-",
+			"_Save",
+			"-",
+			"_Open",
+			"-",
+			"_Close"
+		]
+	}, 
+	{Text: "_Edit", Children:
+		[
+			"_Undo",
+			"-",
+			"_Redo"
+		]
+	},
+	{Text: "_Help", Children:
+			[
+				"_Commands"
+			]
+	}
+]

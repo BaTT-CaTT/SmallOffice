@@ -64,14 +64,18 @@ public static RemoteObject _prop = RemoteObject.declareNull("anywheresoftware.b4
 public static RemoteObject _timer1 = RemoteObject.declareNull("anywheresoftware.b4a.objects.Timer");
 public static RemoteObject _manager = RemoteObject.declareNull("b4j.example.undomanager");
 public static RemoteObject _cho = RemoteObject.declareNull("anywheresoftware.b4j.objects.DirectoryChooserWrapper");
-public static RemoteObject _save = RemoteObject.declareNull("anywheresoftware.b4j.objects.FileChooserWrapper");
+public static RemoteObject _save1 = RemoteObject.declareNull("anywheresoftware.b4j.objects.FileChooserWrapper");
 public static RemoteObject _time = RemoteObject.createImmutable("");
 public static RemoteObject _date = RemoteObject.createImmutable("");
 public static RemoteObject _mi = RemoteObject.declareNull("anywheresoftware.b4j.objects.MenuItemWrapper.ConcreteMenuItemWrapper");
 public static RemoteObject _edit = RemoteObject.declareNull("anywheresoftware.b4j.objects.HTMLEditorWrapper");
 public static RemoteObject _statusbar1 = RemoteObject.declareNull("anywheresoftware.b4j.objects.StatusBarWrapper");
+public static RemoteObject _tr = RemoteObject.declareNull("anywheresoftware.b4a.objects.streams.File.TextReaderWrapper");
+public static RemoteObject _pane1 = RemoteObject.declareNull("anywheresoftware.b4j.objects.PaneWrapper.ConcretePaneWrapper");
+public static RemoteObject _textarea1 = RemoteObject.declareNull("anywheresoftware.b4j.objects.TextInputControlWrapper.TextAreaWrapper");
+public static RemoteObject _cmenu = RemoteObject.declareNull("anywheresoftware.b4j.objects.MenuItemWrapper.ContextMenuWrapper");
 public static b4j.example.cssutils _cssutils = null;
   public Object[] GetGlobals() {
-		return new Object[] {"cho",main._cho,"CSSUtils",Debug.moduleToString(b4j.example.cssutils.class),"date",main._date,"dir",main._dir,"dir1",main._dir1,"edit",main._edit,"fx",main._fx,"MainForm",main._mainform,"manager",main._manager,"MenuBar1",main._menubar1,"menulist",main._menulist,"mi",main._mi,"prop",main._prop,"save",main._save,"StatusBar1",main._statusbar1,"time",main._time,"timer1",main._timer1};
+		return new Object[] {"cho",main._cho,"CMenu",main._cmenu,"CSSUtils",Debug.moduleToString(b4j.example.cssutils.class),"date",main._date,"dir",main._dir,"dir1",main._dir1,"edit",main._edit,"fx",main._fx,"MainForm",main._mainform,"manager",main._manager,"MenuBar1",main._menubar1,"menulist",main._menulist,"mi",main._mi,"Pane1",main._pane1,"prop",main._prop,"save1",main._save1,"StatusBar1",main._statusbar1,"TextArea1",main._textarea1,"time",main._time,"timer1",main._timer1,"tr",main._tr};
 }
 }

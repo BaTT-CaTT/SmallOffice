@@ -99,12 +99,16 @@ public static anywheresoftware.b4j.objects.PropertySheetWrapper _prop = null;
 public static anywheresoftware.b4a.objects.Timer _timer1 = null;
 public static b4j.example.undomanager _manager = null;
 public static anywheresoftware.b4j.objects.DirectoryChooserWrapper _cho = null;
-public static anywheresoftware.b4j.objects.FileChooserWrapper _save = null;
+public static anywheresoftware.b4j.objects.FileChooserWrapper _save1 = null;
 public static String _time = "";
 public static String _date = "";
 public static anywheresoftware.b4j.objects.MenuItemWrapper.ConcreteMenuItemWrapper _mi = null;
 public static anywheresoftware.b4j.objects.HTMLEditorWrapper _edit = null;
 public static anywheresoftware.b4j.objects.StatusBarWrapper _statusbar1 = null;
+public static anywheresoftware.b4a.objects.streams.File.TextReaderWrapper _tr = null;
+public static anywheresoftware.b4j.objects.PaneWrapper.ConcretePaneWrapper _pane1 = null;
+public static anywheresoftware.b4j.objects.TextInputControlWrapper.TextAreaWrapper _textarea1 = null;
+public static anywheresoftware.b4j.objects.MenuItemWrapper.ContextMenuWrapper _cmenu = null;
 public static b4j.example.cssutils _cssutils = null;
 public static boolean  _application_error(anywheresoftware.b4a.objects.B4AException _error,String _stacktrace) throws Exception{
 RDebugUtils.currentModule="main";
@@ -129,72 +133,108 @@ RDebugUtils.currentLine=65537;
  //BA.debugLineNum = 65537;BA.debugLine="MainForm = Form1";
 _mainform = _form1;
 RDebugUtils.currentLine=65538;
- //BA.debugLineNum = 65538;BA.debugLine="MainForm.RootPane.LoadLayout(\"1\") 'Load the layou";
-_mainform.getRootPane().LoadLayout(ba,"1");
-RDebugUtils.currentLine=65539;
- //BA.debugLineNum = 65539;BA.debugLine="MainForm.Resizable=False";
-_mainform.setResizable(anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 65538;BA.debugLine="MainForm.SetFormStyle(\"DECORATED\")";
+_mainform.SetFormStyle("DECORATED");
 RDebugUtils.currentLine=65540;
- //BA.debugLineNum = 65540;BA.debugLine="MainForm.Show";
-_mainform.Show();
+ //BA.debugLineNum = 65540;BA.debugLine="MainForm.title=\"SmallNode\"";
+_mainform.setTitle("SmallNode");
 RDebugUtils.currentLine=65541;
- //BA.debugLineNum = 65541;BA.debugLine="prop.Initialize(\"prop\")";
-_prop.Initialize(ba,"prop");
+ //BA.debugLineNum = 65541;BA.debugLine="MainForm.WindowWidth = fx.PrimaryScreen.MaxX - fx";
+_mainform.setWindowWidth(_fx.getPrimaryScreen().getMaxX()-_fx.getPrimaryScreen().getMinX());
 RDebugUtils.currentLine=65542;
- //BA.debugLineNum = 65542;BA.debugLine="If File.Exists(\"C:\\SmartOffice\\Files\",\"log.txt\")";
-if (anywheresoftware.b4a.keywords.Common.File.Exists("C:\\SmartOffice\\Files","log.txt")) { 
- }else {
+ //BA.debugLineNum = 65542;BA.debugLine="MainForm.WindowLeft = fx.PrimaryScreen.MinX";
+_mainform.setWindowLeft(_fx.getPrimaryScreen().getMinX());
+RDebugUtils.currentLine=65543;
+ //BA.debugLineNum = 65543;BA.debugLine="MainForm.WindowHeight = fx.PrimaryScreen.MaxY - f";
+_mainform.setWindowHeight(_fx.getPrimaryScreen().getMaxY()-_fx.getPrimaryScreen().getMinY());
+RDebugUtils.currentLine=65544;
+ //BA.debugLineNum = 65544;BA.debugLine="MainForm.WindowTop = fx.PrimaryScreen.MinY";
+_mainform.setWindowTop(_fx.getPrimaryScreen().getMinY());
 RDebugUtils.currentLine=65545;
- //BA.debugLineNum = 65545;BA.debugLine="File.MakeDir(\"C:\\\",\"SmartOffice\\core\\data\")";
-anywheresoftware.b4a.keywords.Common.File.MakeDir("C:\\","SmartOffice\\core\\data");
+ //BA.debugLineNum = 65545;BA.debugLine="MainForm.RootPane.LoadLayout(\"1\") 'Load the layou";
+_mainform.getRootPane().LoadLayout(ba,"1");
 RDebugUtils.currentLine=65546;
- //BA.debugLineNum = 65546;BA.debugLine="File.MakeDir(\"C:\\\",\"SmartOffice\\Projects\")";
-anywheresoftware.b4a.keywords.Common.File.MakeDir("C:\\","SmartOffice\\Projects");
+ //BA.debugLineNum = 65546;BA.debugLine="MainForm.Resizable=True";
+_mainform.setResizable(anywheresoftware.b4a.keywords.Common.True);
 RDebugUtils.currentLine=65547;
- //BA.debugLineNum = 65547;BA.debugLine="File.MakeDir(\"C:\\Users\\Public\\Documents\",\"SmartO";
-anywheresoftware.b4a.keywords.Common.File.MakeDir("C:\\Users\\Public\\Documents","SmartOffice\\Projects");
-RDebugUtils.currentLine=65548;
- //BA.debugLineNum = 65548;BA.debugLine="File.WriteString(dir1,\"log.txt\",\"Willkommen\")";
-anywheresoftware.b4a.keywords.Common.File.WriteString(_dir1,"log.txt","Willkommen");
- };
-RDebugUtils.currentLine=65550;
- //BA.debugLineNum = 65550;BA.debugLine="menulist.Initialize";
+ //BA.debugLineNum = 65547;BA.debugLine="menulist.Initialize";
 _menulist.Initialize();
-RDebugUtils.currentLine=65551;
- //BA.debugLineNum = 65551;BA.debugLine="menulist.AddAll(MenuBar1.Menus)";
-_menulist.AddAll(_menubar1.getMenus());
-RDebugUtils.currentLine=65552;
- //BA.debugLineNum = 65552;BA.debugLine="DateTime.DateFormat=\"yyyy-MM-dd\"";
-anywheresoftware.b4a.keywords.Common.DateTime.setDateFormat("yyyy-MM-dd");
+RDebugUtils.currentLine=65548;
+ //BA.debugLineNum = 65548;BA.debugLine="CMenu.Initialize(\"CM\")";
+_cmenu.Initialize(ba,"CM");
+RDebugUtils.currentLine=65549;
+ //BA.debugLineNum = 65549;BA.debugLine="prop.Initialize(\"prop\")";
+_prop.Initialize(ba,"prop");
+RDebugUtils.currentLine=65550;
+ //BA.debugLineNum = 65550;BA.debugLine="If File.Exists(dir,\"logs.txt\") Then";
+if (anywheresoftware.b4a.keywords.Common.File.Exists(_dir,"logs.txt")) { 
+ }else {
 RDebugUtils.currentLine=65553;
- //BA.debugLineNum = 65553;BA.debugLine="time=DateTime.Time(DateTime.Now)";
-_time = anywheresoftware.b4a.keywords.Common.DateTime.Time(anywheresoftware.b4a.keywords.Common.DateTime.getNow());
+ //BA.debugLineNum = 65553;BA.debugLine="File.MakeDir(\"C:\\Users\\Public\\Documents\",\"SmartO";
+anywheresoftware.b4a.keywords.Common.File.MakeDir("C:\\Users\\Public\\Documents","SmartOffice\\Projects\\Web");
 RDebugUtils.currentLine=65554;
- //BA.debugLineNum = 65554;BA.debugLine="date=DateTime.Date(DateTime.Now)";
-_date = anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow());
+ //BA.debugLineNum = 65554;BA.debugLine="File.MakeDir(\"C:\\\",\"SmartOffice\\core\\data\")";
+anywheresoftware.b4a.keywords.Common.File.MakeDir("C:\\","SmartOffice\\core\\data");
 RDebugUtils.currentLine=65555;
- //BA.debugLineNum = 65555;BA.debugLine="timer1.Initialize(\"timer1\", 1000)";
-_timer1.Initialize(ba,"timer1",(long) (1000));
+ //BA.debugLineNum = 65555;BA.debugLine="File.MakeDir(\"C:\\\",\"SmartOffice\\Projects\")";
+anywheresoftware.b4a.keywords.Common.File.MakeDir("C:\\","SmartOffice\\Projects");
 RDebugUtils.currentLine=65556;
- //BA.debugLineNum = 65556;BA.debugLine="timer1.Enabled = True";
-_timer1.setEnabled(anywheresoftware.b4a.keywords.Common.True);
-RDebugUtils.currentLine=65557;
- //BA.debugLineNum = 65557;BA.debugLine="manager.Initialize(GetState)";
-_manager._initialize(null,ba,(Object)(_getstate()));
+ //BA.debugLineNum = 65556;BA.debugLine="File.WriteList(dir,\"setlist.txt\",menulist)";
+anywheresoftware.b4a.keywords.Common.File.WriteList(_dir,"setlist.txt",_menulist);
 RDebugUtils.currentLine=65558;
- //BA.debugLineNum = 65558;BA.debugLine="cho.Initialize";
-_cho.Initialize();
+ //BA.debugLineNum = 65558;BA.debugLine="File.WriteString(dir,\"log.txt\",\"Willkommen\")";
+anywheresoftware.b4a.keywords.Common.File.WriteString(_dir,"log.txt","Willkommen");
 RDebugUtils.currentLine=65559;
- //BA.debugLineNum = 65559;BA.debugLine="save.Initialize";
-_save.Initialize();
-RDebugUtils.currentLine=65560;
- //BA.debugLineNum = 65560;BA.debugLine="cho.InitialDirectory=dir1&\"\\Projects\"";
-_cho.setInitialDirectory(_dir1+"\\Projects");
+ //BA.debugLineNum = 65559;BA.debugLine="File.WriteString(dir,\"new.txt\",\"Welcome this is";
+anywheresoftware.b4a.keywords.Common.File.WriteString(_dir,"new.txt","Welcome this is a New Texted file.");
+ };
 RDebugUtils.currentLine=65561;
- //BA.debugLineNum = 65561;BA.debugLine="save.InitialDirectory=cho.InitialDirectory";
-_save.setInitialDirectory(_cho.getInitialDirectory());
+ //BA.debugLineNum = 65561;BA.debugLine="menulist.Clear";
+_menulist.Clear();
 RDebugUtils.currentLine=65563;
- //BA.debugLineNum = 65563;BA.debugLine="End Sub";
+ //BA.debugLineNum = 65563;BA.debugLine="mi.Initialize(\"Html Code\",\"mi\")";
+_mi.Initialize(ba,"Html Code","mi");
+RDebugUtils.currentLine=65564;
+ //BA.debugLineNum = 65564;BA.debugLine="CMenu.MenuItems.Add(mi)";
+_cmenu.getMenuItems().Add((Object)(_mi.getObject()));
+RDebugUtils.currentLine=65565;
+ //BA.debugLineNum = 65565;BA.debugLine="DateTime.DateFormat=\"yyyy-MM-dd\"";
+anywheresoftware.b4a.keywords.Common.DateTime.setDateFormat("yyyy-MM-dd");
+RDebugUtils.currentLine=65566;
+ //BA.debugLineNum = 65566;BA.debugLine="time=DateTime.Time(DateTime.Now)";
+_time = anywheresoftware.b4a.keywords.Common.DateTime.Time(anywheresoftware.b4a.keywords.Common.DateTime.getNow());
+RDebugUtils.currentLine=65567;
+ //BA.debugLineNum = 65567;BA.debugLine="date=DateTime.Date(DateTime.Now)";
+_date = anywheresoftware.b4a.keywords.Common.DateTime.Date(anywheresoftware.b4a.keywords.Common.DateTime.getNow());
+RDebugUtils.currentLine=65568;
+ //BA.debugLineNum = 65568;BA.debugLine="timer1.Initialize(\"timer1\", 1000)";
+_timer1.Initialize(ba,"timer1",(long) (1000));
+RDebugUtils.currentLine=65569;
+ //BA.debugLineNum = 65569;BA.debugLine="timer1.Enabled = True";
+_timer1.setEnabled(anywheresoftware.b4a.keywords.Common.True);
+RDebugUtils.currentLine=65570;
+ //BA.debugLineNum = 65570;BA.debugLine="manager.Initialize(GetState)";
+_manager._initialize(null,ba,(Object)(_getstate()));
+RDebugUtils.currentLine=65571;
+ //BA.debugLineNum = 65571;BA.debugLine="cho.Initialize";
+_cho.Initialize();
+RDebugUtils.currentLine=65572;
+ //BA.debugLineNum = 65572;BA.debugLine="save1.Initialize";
+_save1.Initialize();
+RDebugUtils.currentLine=65573;
+ //BA.debugLineNum = 65573;BA.debugLine="cho.InitialDirectory=dir1&\"\\Projects\"";
+_cho.setInitialDirectory(_dir1+"\\Projects");
+RDebugUtils.currentLine=65574;
+ //BA.debugLineNum = 65574;BA.debugLine="save1.InitialDirectory=dir1&\"\\Projects\"";
+_save1.setInitialDirectory(_dir1+"\\Projects");
+RDebugUtils.currentLine=65575;
+ //BA.debugLineNum = 65575;BA.debugLine="RedirectOutput(dir, \"logs.txt\")";
+_redirectoutput(_dir,"logs.txt");
+RDebugUtils.currentLine=65578;
+ //BA.debugLineNum = 65578;BA.debugLine="MainForm.Show";
+_mainform.Show();
+RDebugUtils.currentLine=65579;
+ //BA.debugLineNum = 65579;BA.debugLine="End Sub";
 return "";
 }
 public static b4j.example.main._undodata  _getstate() throws Exception{
@@ -202,62 +242,72 @@ RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "getstate"))
 	return (b4j.example.main._undodata) Debug.delegate(ba, "getstate", null);
 b4j.example.main._undodata _ud = null;
-RDebugUtils.currentLine=196608;
- //BA.debugLineNum = 196608;BA.debugLine="Sub GetState As UndoData";
-RDebugUtils.currentLine=196609;
- //BA.debugLineNum = 196609;BA.debugLine="Dim ud As UndoData";
+RDebugUtils.currentLine=327680;
+ //BA.debugLineNum = 327680;BA.debugLine="Sub GetState As UndoData";
+RDebugUtils.currentLine=327681;
+ //BA.debugLineNum = 327681;BA.debugLine="Dim ud As UndoData";
 _ud = new b4j.example.main._undodata();
-RDebugUtils.currentLine=196610;
- //BA.debugLineNum = 196610;BA.debugLine="ud.Initialize";
+RDebugUtils.currentLine=327682;
+ //BA.debugLineNum = 327682;BA.debugLine="ud.Initialize";
 _ud.Initialize();
-RDebugUtils.currentLine=196611;
- //BA.debugLineNum = 196611;BA.debugLine="ud.Text = edit.HtmlText";
+RDebugUtils.currentLine=327683;
+ //BA.debugLineNum = 327683;BA.debugLine="ud.Text = edit.HtmlText";
 _ud.Text = _edit.getHtmlText();
-RDebugUtils.currentLine=196613;
- //BA.debugLineNum = 196613;BA.debugLine="Return ud";
+RDebugUtils.currentLine=327685;
+ //BA.debugLineNum = 327685;BA.debugLine="Return ud";
 if (true) return _ud;
-RDebugUtils.currentLine=196614;
- //BA.debugLineNum = 196614;BA.debugLine="End Sub";
+RDebugUtils.currentLine=327686;
+ //BA.debugLineNum = 327686;BA.debugLine="End Sub";
 return null;
+}
+public static String  _redirectoutput(String _dir2,String _filename) throws Exception{
+RDebugUtils.currentModule="main";
+if (Debug.shouldDelegate(ba, "redirectoutput"))
+	return (String) Debug.delegate(ba, "redirectoutput", new Object[] {_dir2,_filename});
+RDebugUtils.currentLine=262144;
+ //BA.debugLineNum = 262144;BA.debugLine="Sub RedirectOutput (dir2 As String, FileName As St";
+RDebugUtils.currentLine=262154;
+ //BA.debugLineNum = 262154;BA.debugLine="End Sub";
+return "";
 }
 public static String  _btnredo_action() throws Exception{
 RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "btnredo_action"))
 	return (String) Debug.delegate(ba, "btnredo_action", null);
 b4j.example.main._undodata _ud = null;
-RDebugUtils.currentLine=983040;
- //BA.debugLineNum = 983040;BA.debugLine="Sub btnredo_Action";
-RDebugUtils.currentLine=983041;
- //BA.debugLineNum = 983041;BA.debugLine="Dim ud As UndoData = manager.Redo";
+RDebugUtils.currentLine=655360;
+ //BA.debugLineNum = 655360;BA.debugLine="Sub btnredo_Action";
+RDebugUtils.currentLine=655361;
+ //BA.debugLineNum = 655361;BA.debugLine="Dim ud As UndoData = manager.Redo";
 _ud = (b4j.example.main._undodata)(_manager._redo(null));
-RDebugUtils.currentLine=983042;
- //BA.debugLineNum = 983042;BA.debugLine="If ud <> Null Then";
+RDebugUtils.currentLine=655362;
+ //BA.debugLineNum = 655362;BA.debugLine="If ud <> Null Then";
 if (_ud!= null) { 
-RDebugUtils.currentLine=983043;
- //BA.debugLineNum = 983043;BA.debugLine="SetState(ud)";
+RDebugUtils.currentLine=655363;
+ //BA.debugLineNum = 655363;BA.debugLine="SetState(ud)";
 _setstate(_ud);
-RDebugUtils.currentLine=983044;
- //BA.debugLineNum = 983044;BA.debugLine="StatusBar1.Progress=100";
+RDebugUtils.currentLine=655364;
+ //BA.debugLineNum = 655364;BA.debugLine="StatusBar1.Progress=100";
 _statusbar1.setProgress(100);
-RDebugUtils.currentLine=983045;
- //BA.debugLineNum = 983045;BA.debugLine="StatusBar1.Text=\"ReDone @\"&time";
+RDebugUtils.currentLine=655365;
+ //BA.debugLineNum = 655365;BA.debugLine="StatusBar1.Text=\"ReDone @\"&time";
 _statusbar1.setText("ReDone @"+_time);
  };
-RDebugUtils.currentLine=983047;
- //BA.debugLineNum = 983047;BA.debugLine="End Sub";
+RDebugUtils.currentLine=655367;
+ //BA.debugLineNum = 655367;BA.debugLine="End Sub";
 return "";
 }
 public static String  _setstate(b4j.example.main._undodata _ud) throws Exception{
 RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "setstate"))
 	return (String) Debug.delegate(ba, "setstate", new Object[] {_ud});
-RDebugUtils.currentLine=262144;
- //BA.debugLineNum = 262144;BA.debugLine="Sub SetState (ud As UndoData)";
-RDebugUtils.currentLine=262145;
- //BA.debugLineNum = 262145;BA.debugLine="edit.HtmlText = ud.Text";
+RDebugUtils.currentLine=393216;
+ //BA.debugLineNum = 393216;BA.debugLine="Sub SetState (ud As UndoData)";
+RDebugUtils.currentLine=393217;
+ //BA.debugLineNum = 393217;BA.debugLine="edit.HtmlText = ud.Text";
 _edit.setHtmlText(_ud.Text);
-RDebugUtils.currentLine=262147;
- //BA.debugLineNum = 262147;BA.debugLine="End Sub";
+RDebugUtils.currentLine=393219;
+ //BA.debugLineNum = 393219;BA.debugLine="End Sub";
 return "";
 }
 public static String  _btnundo_action() throws Exception{
@@ -265,22 +315,22 @@ RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "btnundo_action"))
 	return (String) Debug.delegate(ba, "btnundo_action", null);
 b4j.example.main._undodata _ud = null;
-RDebugUtils.currentLine=917504;
- //BA.debugLineNum = 917504;BA.debugLine="Sub btnundo_Action";
-RDebugUtils.currentLine=917505;
- //BA.debugLineNum = 917505;BA.debugLine="Dim ud As UndoData = manager.Undo";
+RDebugUtils.currentLine=589824;
+ //BA.debugLineNum = 589824;BA.debugLine="Sub btnundo_Action";
+RDebugUtils.currentLine=589825;
+ //BA.debugLineNum = 589825;BA.debugLine="Dim ud As UndoData = manager.Undo";
 _ud = (b4j.example.main._undodata)(_manager._undo(null));
-RDebugUtils.currentLine=917506;
- //BA.debugLineNum = 917506;BA.debugLine="SetState(ud)";
+RDebugUtils.currentLine=589826;
+ //BA.debugLineNum = 589826;BA.debugLine="SetState(ud)";
 _setstate(_ud);
-RDebugUtils.currentLine=917507;
- //BA.debugLineNum = 917507;BA.debugLine="StatusBar1.Progress=100";
+RDebugUtils.currentLine=589827;
+ //BA.debugLineNum = 589827;BA.debugLine="StatusBar1.Progress=100";
 _statusbar1.setProgress(100);
-RDebugUtils.currentLine=917508;
- //BA.debugLineNum = 917508;BA.debugLine="StatusBar1.Text=\"UnDone @\"&time";
+RDebugUtils.currentLine=589828;
+ //BA.debugLineNum = 589828;BA.debugLine="StatusBar1.Text=\"UnDone @\"&time";
 _statusbar1.setText("UnDone @"+_time);
-RDebugUtils.currentLine=917509;
- //BA.debugLineNum = 917509;BA.debugLine="End Sub";
+RDebugUtils.currentLine=589829;
+ //BA.debugLineNum = 589829;BA.debugLine="End Sub";
 return "";
 }
 public static String  _button1_action() throws Exception{
@@ -289,172 +339,273 @@ if (Debug.shouldDelegate(ba, "button1_action"))
 	return (String) Debug.delegate(ba, "button1_action", null);
 String _filename = "";
 anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper _out = null;
-RDebugUtils.currentLine=1114112;
- //BA.debugLineNum = 1114112;BA.debugLine="Sub Button1_Action";
-RDebugUtils.currentLine=1114113;
- //BA.debugLineNum = 1114113;BA.debugLine="Dim filename As String = save.ShowSave(MainForm)";
-_filename = _save.ShowSave(_mainform);
-RDebugUtils.currentLine=1114114;
- //BA.debugLineNum = 1114114;BA.debugLine="save.setExtensionFilter(\"TextFile\", Array As Stri";
-_save.SetExtensionFilter("TextFile",anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"*.txt"}));
-RDebugUtils.currentLine=1114115;
- //BA.debugLineNum = 1114115;BA.debugLine="save.InitialFileName=\"default.txt\"";
-_save.setInitialFileName("default.txt");
-RDebugUtils.currentLine=1114116;
- //BA.debugLineNum = 1114116;BA.debugLine="save.Title=\"Save File\"";
-_save.setTitle("Save File");
-RDebugUtils.currentLine=1114117;
- //BA.debugLineNum = 1114117;BA.debugLine="If filename <> \"\" Then";
+RDebugUtils.currentLine=917504;
+ //BA.debugLineNum = 917504;BA.debugLine="Sub Button1_Action";
+RDebugUtils.currentLine=917505;
+ //BA.debugLineNum = 917505;BA.debugLine="save1.setExtensionFilter(\"TextFile\", Array As Str";
+_save1.SetExtensionFilter("TextFile",anywheresoftware.b4a.keywords.Common.ArrayToList(new String[]{"*.txt"}));
+RDebugUtils.currentLine=917506;
+ //BA.debugLineNum = 917506;BA.debugLine="save1.InitialFileName=\"default.txt\"";
+_save1.setInitialFileName("default.txt");
+RDebugUtils.currentLine=917507;
+ //BA.debugLineNum = 917507;BA.debugLine="save1.Title=\"Save File\"";
+_save1.setTitle("Save File");
+RDebugUtils.currentLine=917508;
+ //BA.debugLineNum = 917508;BA.debugLine="Dim filename As String = save1.ShowSave(MainForm)";
+_filename = _save1.ShowSave(_mainform);
+RDebugUtils.currentLine=917509;
+ //BA.debugLineNum = 917509;BA.debugLine="If filename <> \"\" Then";
 if ((_filename).equals("") == false) { 
-RDebugUtils.currentLine=1114118;
- //BA.debugLineNum = 1114118;BA.debugLine="If filename.ToLowerCase.EndsWith(\".txt\") = False";
+RDebugUtils.currentLine=917510;
+ //BA.debugLineNum = 917510;BA.debugLine="If filename.ToLowerCase.EndsWith(\".txt\") = False";
 if (_filename.toLowerCase().endsWith(".txt")==anywheresoftware.b4a.keywords.Common.False) { 
 _filename = _filename+".txt";};
-RDebugUtils.currentLine=1114119;
- //BA.debugLineNum = 1114119;BA.debugLine="Dim out As OutputStream = File.OpenOutput(\"\", fil";
+RDebugUtils.currentLine=917511;
+ //BA.debugLineNum = 917511;BA.debugLine="Dim out As OutputStream = File.OpenOutput(\"\", fil";
 _out = new anywheresoftware.b4a.objects.streams.File.OutputStreamWrapper();
 _out = anywheresoftware.b4a.keywords.Common.File.OpenOutput("",_filename,anywheresoftware.b4a.keywords.Common.False);
-RDebugUtils.currentLine=1114120;
- //BA.debugLineNum = 1114120;BA.debugLine="File.Delete(dir,\"nosave.txt\")";
+RDebugUtils.currentLine=917512;
+ //BA.debugLineNum = 917512;BA.debugLine="File.Delete(dir,\"nosave.txt\")";
 anywheresoftware.b4a.keywords.Common.File.Delete(_dir,"nosave.txt");
-RDebugUtils.currentLine=1114121;
- //BA.debugLineNum = 1114121;BA.debugLine="out.Close";
+RDebugUtils.currentLine=917513;
+ //BA.debugLineNum = 917513;BA.debugLine="File.WriteString(\"\",filename,edit.HtmlText)";
+anywheresoftware.b4a.keywords.Common.File.WriteString("",_filename,_edit.getHtmlText());
+RDebugUtils.currentLine=917514;
+ //BA.debugLineNum = 917514;BA.debugLine="MainForm.Title=filename";
+_mainform.setTitle(_filename);
+RDebugUtils.currentLine=917515;
+ //BA.debugLineNum = 917515;BA.debugLine="menulist.Add(filename)";
+_menulist.Add((Object)(_filename));
+RDebugUtils.currentLine=917516;
+ //BA.debugLineNum = 917516;BA.debugLine="new_file(filename)";
+_new_file(_filename);
+RDebugUtils.currentLine=917517;
+ //BA.debugLineNum = 917517;BA.debugLine="out.Close";
 _out.Close();
-RDebugUtils.currentLine=1114122;
- //BA.debugLineNum = 1114122;BA.debugLine="Log(\"File saved: \" & filename)";
+RDebugUtils.currentLine=917518;
+ //BA.debugLineNum = 917518;BA.debugLine="Log(\"File saved: \" & filename)";
 anywheresoftware.b4a.keywords.Common.Log("File saved: "+_filename);
  };
-RDebugUtils.currentLine=1114125;
- //BA.debugLineNum = 1114125;BA.debugLine="End Sub";
+RDebugUtils.currentLine=917521;
+ //BA.debugLineNum = 917521;BA.debugLine="End Sub";
 return "";
 }
-public static String  _button2_action() throws Exception{
+public static String  _new_file(String _text) throws Exception{
 RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(ba, "button2_action"))
-	return (String) Debug.delegate(ba, "button2_action", null);
-RDebugUtils.currentLine=1048576;
- //BA.debugLineNum = 1048576;BA.debugLine="Sub Button2_Action";
-RDebugUtils.currentLine=1048578;
- //BA.debugLineNum = 1048578;BA.debugLine="End Sub";
+if (Debug.shouldDelegate(ba, "new_file"))
+	return (String) Debug.delegate(ba, "new_file", new Object[] {_text});
+RDebugUtils.currentLine=786432;
+ //BA.debugLineNum = 786432;BA.debugLine="Sub new_file(text As String)";
+RDebugUtils.currentLine=786433;
+ //BA.debugLineNum = 786433;BA.debugLine="File.WriteString(dir,\"new.txt\",text)";
+anywheresoftware.b4a.keywords.Common.File.WriteString(_dir,"new.txt",_text);
+RDebugUtils.currentLine=786434;
+ //BA.debugLineNum = 786434;BA.debugLine="read_file";
+_read_file();
+RDebugUtils.currentLine=786435;
+ //BA.debugLineNum = 786435;BA.debugLine="End Sub";
 return "";
 }
 public static String  _mainform_closerequest(anywheresoftware.b4j.objects.NodeWrapper.ConcreteEventWrapper _eventdata) throws Exception{
 RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "mainform_closerequest"))
 	return (String) Debug.delegate(ba, "mainform_closerequest", new Object[] {_eventdata});
-RDebugUtils.currentLine=3801088;
- //BA.debugLineNum = 3801088;BA.debugLine="Sub Mainform_CloseRequest (EventData As Event)";
-RDebugUtils.currentLine=3801089;
- //BA.debugLineNum = 3801089;BA.debugLine="If File.Exists(dir,\"nosave.txt\") Then";
+RDebugUtils.currentLine=1048576;
+ //BA.debugLineNum = 1048576;BA.debugLine="Sub Mainform_CloseRequest (EventData As Event)";
+RDebugUtils.currentLine=1048577;
+ //BA.debugLineNum = 1048577;BA.debugLine="If File.Exists(dir,\"nosave.txt\") Then";
 if (anywheresoftware.b4a.keywords.Common.File.Exists(_dir,"nosave.txt")) { 
-RDebugUtils.currentLine=3801091;
- //BA.debugLineNum = 3801091;BA.debugLine="If fx.Msgbox2(MainForm,\"You apear to close witho";
+RDebugUtils.currentLine=1048579;
+ //BA.debugLineNum = 1048579;BA.debugLine="If fx.Msgbox2(MainForm,\"You apear to close witho";
 if (_fx.Msgbox2(_mainform,"You apear to close without Saving the File! would you like to Save the current document?","Save?!","Yes","","No",_fx.MSGBOX_WARNING)==_fx.DialogResponse.POSITIVE) { 
-RDebugUtils.currentLine=3801092;
- //BA.debugLineNum = 3801092;BA.debugLine="Button1_Action";
+RDebugUtils.currentLine=1048580;
+ //BA.debugLineNum = 1048580;BA.debugLine="Button1_Action";
 _button1_action();
  }else {
-RDebugUtils.currentLine=3801094;
- //BA.debugLineNum = 3801094;BA.debugLine="File.WriteString(dir,\"nosave.txt\",\"true\")";
+RDebugUtils.currentLine=1048582;
+ //BA.debugLineNum = 1048582;BA.debugLine="File.WriteString(dir,\"nosave.txt\",\"true\")";
 anywheresoftware.b4a.keywords.Common.File.WriteString(_dir,"nosave.txt","true");
  };
  }else {
-RDebugUtils.currentLine=3801097;
- //BA.debugLineNum = 3801097;BA.debugLine="EventData.Consume";
+RDebugUtils.currentLine=1048585;
+ //BA.debugLineNum = 1048585;BA.debugLine="EventData.Consume";
 _eventdata.Consume();
-RDebugUtils.currentLine=3801098;
- //BA.debugLineNum = 3801098;BA.debugLine="MainForm.Close";
+RDebugUtils.currentLine=1048586;
+ //BA.debugLineNum = 1048586;BA.debugLine="MainForm.Close";
 _mainform.Close();
  };
-RDebugUtils.currentLine=3801100;
- //BA.debugLineNum = 3801100;BA.debugLine="End Sub";
+RDebugUtils.currentLine=1048588;
+ //BA.debugLineNum = 1048588;BA.debugLine="End Sub";
 return "";
 }
 public static String  _menubar1_action() throws Exception{
 RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "menubar1_action"))
 	return (String) Debug.delegate(ba, "menubar1_action", null);
-RDebugUtils.currentLine=327680;
- //BA.debugLineNum = 327680;BA.debugLine="Sub MenuBar1_Action";
-RDebugUtils.currentLine=327681;
- //BA.debugLineNum = 327681;BA.debugLine="mi = Sender";
+RDebugUtils.currentLine=458752;
+ //BA.debugLineNum = 458752;BA.debugLine="Sub MenuBar1_Action";
+RDebugUtils.currentLine=458753;
+ //BA.debugLineNum = 458753;BA.debugLine="mi = Sender";
 _mi.setObject((javafx.scene.control.MenuItem)(anywheresoftware.b4a.keywords.Common.Sender(ba)));
-RDebugUtils.currentLine=327682;
- //BA.debugLineNum = 327682;BA.debugLine="If mi.Text=\"_Close\" Then";
+RDebugUtils.currentLine=458754;
+ //BA.debugLineNum = 458754;BA.debugLine="If mi.Text=\"_Close\" Then";
 if ((_mi.getText()).equals("_Close")) { 
-RDebugUtils.currentLine=327683;
- //BA.debugLineNum = 327683;BA.debugLine="MainForm.Close";
+RDebugUtils.currentLine=458755;
+ //BA.debugLineNum = 458755;BA.debugLine="MainForm.Close";
 _mainform.Close();
-RDebugUtils.currentLine=327684;
- //BA.debugLineNum = 327684;BA.debugLine="Log(\"close..\")";
+RDebugUtils.currentLine=458756;
+ //BA.debugLineNum = 458756;BA.debugLine="Log(\"close..\")";
 anywheresoftware.b4a.keywords.Common.Log("close..");
  };
-RDebugUtils.currentLine=327686;
- //BA.debugLineNum = 327686;BA.debugLine="If mi.Text=\"_Undo\" Then";
+RDebugUtils.currentLine=458758;
+ //BA.debugLineNum = 458758;BA.debugLine="If mi.Text=\"_New\" Then";
+if ((_mi.getText()).equals("_New")) { 
+RDebugUtils.currentLine=458759;
+ //BA.debugLineNum = 458759;BA.debugLine="new_file(\"New Text\")";
+_new_file("New Text");
+ };
+RDebugUtils.currentLine=458761;
+ //BA.debugLineNum = 458761;BA.debugLine="If mi.Text=\"_Show Code\" Then";
+if ((_mi.getText()).equals("_Show Code")) { 
+RDebugUtils.currentLine=458762;
+ //BA.debugLineNum = 458762;BA.debugLine="show_su";
+_show_su();
+ };
+RDebugUtils.currentLine=458764;
+ //BA.debugLineNum = 458764;BA.debugLine="If mi.Text=\"_Open\" Then";
+if ((_mi.getText()).equals("_Open")) { 
+RDebugUtils.currentLine=458765;
+ //BA.debugLineNum = 458765;BA.debugLine="open_new";
+_open_new();
+ };
+RDebugUtils.currentLine=458767;
+ //BA.debugLineNum = 458767;BA.debugLine="If mi.Text=\"_Undo\" Then";
 if ((_mi.getText()).equals("_Undo")) { 
-RDebugUtils.currentLine=327687;
- //BA.debugLineNum = 327687;BA.debugLine="btnundo_Action";
+RDebugUtils.currentLine=458768;
+ //BA.debugLineNum = 458768;BA.debugLine="btnundo_Action";
 _btnundo_action();
  };
-RDebugUtils.currentLine=327689;
- //BA.debugLineNum = 327689;BA.debugLine="If mi.Text=\"_Redo\" Then";
+RDebugUtils.currentLine=458770;
+ //BA.debugLineNum = 458770;BA.debugLine="If mi.Text=\"_Redo\" Then";
 if ((_mi.getText()).equals("_Redo")) { 
-RDebugUtils.currentLine=327690;
- //BA.debugLineNum = 327690;BA.debugLine="btnredo_Action";
+RDebugUtils.currentLine=458771;
+ //BA.debugLineNum = 458771;BA.debugLine="btnredo_Action";
 _btnredo_action();
  };
-RDebugUtils.currentLine=327692;
- //BA.debugLineNum = 327692;BA.debugLine="If mi.Text=\"_Save\" Then";
+RDebugUtils.currentLine=458773;
+ //BA.debugLineNum = 458773;BA.debugLine="If mi.Text=\"_Save\" Then";
 if ((_mi.getText()).equals("_Save")) { 
-RDebugUtils.currentLine=327693;
- //BA.debugLineNum = 327693;BA.debugLine="Button1_Action";
+RDebugUtils.currentLine=458774;
+ //BA.debugLineNum = 458774;BA.debugLine="Button1_Action";
 _button1_action();
  };
-RDebugUtils.currentLine=327695;
- //BA.debugLineNum = 327695;BA.debugLine="End Sub";
+RDebugUtils.currentLine=458776;
+ //BA.debugLineNum = 458776;BA.debugLine="End Sub";
+return "";
+}
+public static String  _show_su() throws Exception{
+RDebugUtils.currentModule="main";
+if (Debug.shouldDelegate(ba, "show_su"))
+	return (String) Debug.delegate(ba, "show_su", null);
+b4j.example.modalform _mf = null;
+RDebugUtils.currentLine=196608;
+ //BA.debugLineNum = 196608;BA.debugLine="Sub show_su";
+RDebugUtils.currentLine=196609;
+ //BA.debugLineNum = 196609;BA.debugLine="Dim mf As ModalForm";
+_mf = new b4j.example.modalform();
+RDebugUtils.currentLine=196610;
+ //BA.debugLineNum = 196610;BA.debugLine="mf.Initialize(MainForm)";
+_mf._initialize(null,ba,_mainform);
+RDebugUtils.currentLine=196611;
+ //BA.debugLineNum = 196611;BA.debugLine="mf.read_file";
+_mf._read_file(null);
+RDebugUtils.currentLine=196612;
+ //BA.debugLineNum = 196612;BA.debugLine="End Sub";
+return "";
+}
+public static String  _open_new() throws Exception{
+RDebugUtils.currentModule="main";
+if (Debug.shouldDelegate(ba, "open_new"))
+	return (String) Debug.delegate(ba, "open_new", null);
+String _filen = "";
+RDebugUtils.currentLine=720896;
+ //BA.debugLineNum = 720896;BA.debugLine="Sub open_new";
+RDebugUtils.currentLine=720897;
+ //BA.debugLineNum = 720897;BA.debugLine="Dim filen As String = save1.ShowOpen(MainForm)";
+_filen = _save1.ShowOpen(_mainform);
+RDebugUtils.currentLine=720900;
+ //BA.debugLineNum = 720900;BA.debugLine="save1.Title=\"Open File\"";
+_save1.setTitle("Open File");
+RDebugUtils.currentLine=720901;
+ //BA.debugLineNum = 720901;BA.debugLine="If filen <> \"\" Then";
+if ((_filen).equals("") == false) { 
+RDebugUtils.currentLine=720902;
+ //BA.debugLineNum = 720902;BA.debugLine="menulist.Clear";
+_menulist.Clear();
+RDebugUtils.currentLine=720903;
+ //BA.debugLineNum = 720903;BA.debugLine="menulist.Add(filen)";
+_menulist.Add((Object)(_filen));
+RDebugUtils.currentLine=720904;
+ //BA.debugLineNum = 720904;BA.debugLine="edit.HtmlText=File.ReadString(filen,\"\")";
+_edit.setHtmlText(anywheresoftware.b4a.keywords.Common.File.ReadString(_filen,""));
+RDebugUtils.currentLine=720905;
+ //BA.debugLineNum = 720905;BA.debugLine="File.WriteString(dir,\"new.txt\",filen)";
+anywheresoftware.b4a.keywords.Common.File.WriteString(_dir,"new.txt",_filen);
+ };
+RDebugUtils.currentLine=720907;
+ //BA.debugLineNum = 720907;BA.debugLine="End Sub";
 return "";
 }
 public static String  _menubar1_selectedchange(boolean _selected) throws Exception{
 RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "menubar1_selectedchange"))
 	return (String) Debug.delegate(ba, "menubar1_selectedchange", new Object[] {_selected});
-RDebugUtils.currentLine=1179648;
- //BA.debugLineNum = 1179648;BA.debugLine="Sub MenuBar1_SelectedChange (Selected As Boolean)";
-RDebugUtils.currentLine=1179650;
- //BA.debugLineNum = 1179650;BA.debugLine="End Sub";
+RDebugUtils.currentLine=983040;
+ //BA.debugLineNum = 983040;BA.debugLine="Sub MenuBar1_SelectedChange (Selected As Boolean)";
+RDebugUtils.currentLine=983042;
+ //BA.debugLineNum = 983042;BA.debugLine="End Sub";
 return "";
 }
-public static String  _mi_action() throws Exception{
+public static String  _read_file() throws Exception{
 RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(ba, "mi_action"))
-	return (String) Debug.delegate(ba, "mi_action", null);
-RDebugUtils.currentLine=1245184;
- //BA.debugLineNum = 1245184;BA.debugLine="Sub mi_Action";
-RDebugUtils.currentLine=1245185;
- //BA.debugLineNum = 1245185;BA.debugLine="mi = Sender";
-_mi.setObject((javafx.scene.control.MenuItem)(anywheresoftware.b4a.keywords.Common.Sender(ba)));
-RDebugUtils.currentLine=1245186;
- //BA.debugLineNum = 1245186;BA.debugLine="If mi.Text=\"_Kopieren\" Then";
-if ((_mi.getText()).equals("_Kopieren")) { 
-RDebugUtils.currentLine=1245188;
- //BA.debugLineNum = 1245188;BA.debugLine="Log(\"close..\")";
-anywheresoftware.b4a.keywords.Common.Log("close..");
- };
-RDebugUtils.currentLine=1245190;
- //BA.debugLineNum = 1245190;BA.debugLine="End Sub";
+if (Debug.shouldDelegate(ba, "read_file"))
+	return (String) Debug.delegate(ba, "read_file", null);
+RDebugUtils.currentLine=851968;
+ //BA.debugLineNum = 851968;BA.debugLine="Sub read_file";
+RDebugUtils.currentLine=851969;
+ //BA.debugLineNum = 851969;BA.debugLine="edit.HtmlText=File.ReadString(dir,\"new.txt\")";
+_edit.setHtmlText(anywheresoftware.b4a.keywords.Common.File.ReadString(_dir,"new.txt"));
+RDebugUtils.currentLine=851970;
+ //BA.debugLineNum = 851970;BA.debugLine="End Sub";
+return "";
+}
+public static String  _pan1_resize(double _width,double _height) throws Exception{
+RDebugUtils.currentModule="main";
+if (Debug.shouldDelegate(ba, "pan1_resize"))
+	return (String) Debug.delegate(ba, "pan1_resize", new Object[] {_width,_height});
+RDebugUtils.currentLine=3670016;
+ //BA.debugLineNum = 3670016;BA.debugLine="Sub pan1_Resize (Width As Double, Height As Double";
+RDebugUtils.currentLine=3670017;
+ //BA.debugLineNum = 3670017;BA.debugLine="Pane1.PrefHeight=-1";
+_pane1.setPrefHeight(-1);
+RDebugUtils.currentLine=3670018;
+ //BA.debugLineNum = 3670018;BA.debugLine="pane1.PrefWidth=-1";
+_pane1.setPrefWidth(-1);
+RDebugUtils.currentLine=3670019;
+ //BA.debugLineNum = 3670019;BA.debugLine="End Sub";
 return "";
 }
 public static String  _timer1_tick() throws Exception{
 RDebugUtils.currentModule="main";
 if (Debug.shouldDelegate(ba, "timer1_tick"))
 	return (String) Debug.delegate(ba, "timer1_tick", null);
-RDebugUtils.currentLine=851968;
- //BA.debugLineNum = 851968;BA.debugLine="Sub Timer1_Tick";
-RDebugUtils.currentLine=851969;
- //BA.debugLineNum = 851969;BA.debugLine="manager.AddState(GetState) 'nothing will happen i";
+RDebugUtils.currentLine=524288;
+ //BA.debugLineNum = 524288;BA.debugLine="Sub Timer1_Tick";
+RDebugUtils.currentLine=524289;
+ //BA.debugLineNum = 524289;BA.debugLine="manager.AddState(GetState) 'nothing will happen i";
 _manager._addstate(null,(Object)(_getstate()));
-RDebugUtils.currentLine=851970;
- //BA.debugLineNum = 851970;BA.debugLine="End Sub";
+RDebugUtils.currentLine=524290;
+ //BA.debugLineNum = 524290;BA.debugLine="End Sub";
 return "";
 }
 }
